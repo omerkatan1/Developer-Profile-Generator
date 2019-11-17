@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
+require("./generateHTML");
 
 inquirer
     .prompt([
@@ -23,10 +24,10 @@ inquirer
         const queryURL = `https://api.github.com/users/${username}`;
 
 
+
         axios
             .get(queryURL)
             .then(function (response) {
-                console.log(response);
                 const bio = response.data.bio;
                 const profilePic = response.data.avatar_url;
                 const username = response.data.login;
