@@ -9,7 +9,7 @@ inquirer
             name: "username"
         }
     ).then(function({username}) {
-        const queryURL = `https://api.github.com/users/${username}/repos?per_page=100`;
+        const queryURL = `https://api.github.com/users/${username}`;
 
 
         axios
