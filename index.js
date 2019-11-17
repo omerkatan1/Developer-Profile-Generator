@@ -14,7 +14,11 @@ inquirer
 
         axios
             .get(queryURL)
-            .then(function(result) {
-                console.log(result);
+            .then(function(response) {
+                console.log(response);
+                const bio = response.data.bio;
+                const profilePic = response.data.avatar_url;
+                console.log(bio);
+                console.log(profilePic);
             });
     })
