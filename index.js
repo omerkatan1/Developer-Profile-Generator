@@ -15,10 +15,22 @@ inquirer
         axios
             .get(queryURL)
             .then(function(response) {
-                console.log(response);
+                // console.log(response);
                 const bio = response.data.bio;
                 const profilePic = response.data.avatar_url;
+                const username = response.data.login;
+                const location = response.data.location;
+                const profileURL = response.data.html_url;
+                const numRepos = response.data.public_repos;
+                const followers = response.data.followers;
+                const following = response.data.following;
                 console.log(bio);
                 console.log(profilePic);
+                console.log(username);
+                console.log(location);
+                console.log(profileURL);
+                console.log(numRepos);
+                console.log(followers);
+                console.log(following);
             });
     })
