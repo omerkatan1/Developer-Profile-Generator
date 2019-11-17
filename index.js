@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
-require("./generateHTML");
 
 inquirer
     .prompt([
@@ -16,7 +15,11 @@ inquirer
             choices: ["green", "blue", "pink", "red"]
         },
     ]).then(function (answers) {
-        const color = answers.color;
+
+        function getColor(answers) {
+            const color = answers.color;
+            return color;
+        }
         const username = answers.username;
         console.log(username);
         console.log(color);
@@ -38,4 +41,3 @@ inquirer
                 const following = response.data.following;
             });
     })
-
