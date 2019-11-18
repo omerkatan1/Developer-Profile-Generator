@@ -26,6 +26,7 @@ inquirer
         // const appendFileAsync = util.promisify(fs.appendFile);
         // const readFileAsync = util.promisify(fs.readFile);
 
+        
         axios
             .get(queryURL)
             .then(function (response) {
@@ -39,8 +40,7 @@ inquirer
                 const followers = response.data.followers;
                 const following = response.data.following;
 
-
-                const responseArray = [bio, profilePic, username, location, profileURL, numRepos, followers, following];
+                const get
 
 
                 fs.writeFile('gitResponse.txt', "" , function(err) {
