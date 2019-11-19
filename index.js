@@ -40,24 +40,5 @@ inquirer
                 const followers = response.data.followers;
                 const following = response.data.following;
 
-                const get
-
-
-                fs.writeFile('gitResponse.txt', "" , function(err) {
-                    if(err) {
-                        return console.log(err);                        
-                    }
-                    console.log("File saved!");
-                })
-                
-                for(var i = 0; i < responseArray.length; i++) {
-                    fs.appendFileAsync('gitResponse.txt', responseArray[i] + "\n", function(err) {
-                        if(err) {
-                            console.log(err);
-                        } else {
-                            console.log("Appended!");
-                        }
-                    })
-                }
             });
     })
