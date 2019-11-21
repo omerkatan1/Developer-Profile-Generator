@@ -1,9 +1,10 @@
-const inquirer = require("inquirer");
-const axios = require("axios");
-const fs = require("fs");
+const inquirer = require('inquirer');
+const fs = require('fs');
+const generateHTML = require('./generateHTML');
+const axios = require('axios');
 
-inquirer
-    .prompt([
+
+const questions = [
         {
             type: "message",
             message: "Input your GitHub username: ",
@@ -14,44 +15,44 @@ inquirer
             type: "list",
             message: "What color template would you link for the resume?",
             choices: ["green", "blue", "pink", "red"]
-        },
-    ]).then(function (answers) {
-        const color = answers.color;
-        const username = answers.username;
-
-        const queryURL = `https://api.github.com/users/${username}`;
-
-        // const appendFileAsync = util.promisify(fs.appendFile);
-        // const readFileAsync = util.promisify(fs.readFile);
-
-        
-        axios
-            .get(queryURL)
-            .then(function (response) {
-
-                const bio = response.data.bio;
-                const profilePic = response.data.avatar_url;
-                const username = response.data.login;
-                const location = response.data.location;
-                const profileURL = response.data.html_url;
-                const numRepos = response.data.public_repos;
-                const followers = response.data.followers;
-                const following = response.data.following;
+        }
+];
 
 
+inquirer.prompt(questions).then(data => {
 
-
-                module.exports = {
-                    color: color,
-                    bio: bio,
-                    profilePic: profilePic,
-                    username: username,
-                    location: location,
-                    profileURL: profileURL,
-                    numRepos: numRepos,
-                    followers: followers,
-                    following: following
-                }
-
-            });
+    fs.writeFile('color.json', JSON.stringify(data, null, '\t'), function(err) {
+        if (err) throw err;
+        console.log("success! created color file!");
     })
+
+    const queryURL = `https://api.github.com/users/${data.username}`;
+    // const axiosResponse = [];
+
+
+    axios
+        .get(queryURL)
+        .then(function(response) {
+
+            const userInfo = {
+                bio: response.data.bio,
+                username: response.data.login,
+                location: response.data.location,
+                profileURL: response.data.html_url,
+                numRepos: response.data.public_repos,
+                followers: response.data.followers,
+                following: response.data.following
+            }
+
+            fs.writeFile('userInfo.json', JSON.stringify(userInfo, null, '\t'), function(err) {
+                if (err) throw err;
+                console.log('success! created color user info file!');
+            })
+        });
+
+
+    generateHTML.readColorFile();
+    
+
+});
+
