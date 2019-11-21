@@ -18,8 +18,6 @@ inquirer
     ]).then(function (answers) {
         const color = answers.color;
         const username = answers.username;
-        console.log(username);
-        console.log(color);
 
         const queryURL = `https://api.github.com/users/${username}`;
 
@@ -39,6 +37,21 @@ inquirer
                 const numRepos = response.data.public_repos;
                 const followers = response.data.followers;
                 const following = response.data.following;
+
+
+
+
+                module.exports = {
+                    color: color,
+                    bio: bio,
+                    profilePic: profilePic,
+                    username: username,
+                    location: location,
+                    profileURL: profileURL,
+                    numRepos: numRepos,
+                    followers: followers,
+                    following: following
+                }
 
             });
     })
