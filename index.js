@@ -21,13 +21,12 @@ const questions = [
 
 inquirer.prompt(questions).then(data => {
 
-    fs.writeFile('color.json', JSON.stringify(data, null, '\t'), function(err) {
-        if (err) throw err;
-        console.log("success! created color file!");
-    })
+    // fs.writeFile('color.json', JSON.stringify(data, null, '\t'), function(err) {
+    //     if (err) throw err;
+    //     console.log("success! created color file!");
+    // })
 
     const queryURL = `https://api.github.com/users/${data.username}`;
-    // const axiosResponse = [];
 
 
     axios
@@ -45,16 +44,19 @@ inquirer.prompt(questions).then(data => {
                 following: response.data.following
             }
 
-            fs.writeFile('userInfo.json', JSON.stringify(userInfo, null, '\t'), function(err) {
+            fs.writeFile('userInfo.json', JSON.stringify(userInfo + data, null, '\t'), function(err) {
                 if (err) throw err;
                 console.log('success! created color user info file!');
-            })
+            });
         });
 });
 
 
 
-console.log(generateHTML.color);
 
+fs.writeFile('index.html', generateHTML.readUserinfoFile(), function(err) {
+    if (err) throw err;
 
+    console.log('html file created');
+})
 
