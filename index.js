@@ -38,6 +38,7 @@ inquirer.prompt(questions).then(data => {
                 bio: response.data.bio,
                 username: response.data.login,
                 location: response.data.location,
+                profilePic: response.data.avatar_url,
                 profileURL: response.data.html_url,
                 numRepos: response.data.public_repos,
                 followers: response.data.followers,
@@ -49,10 +50,11 @@ inquirer.prompt(questions).then(data => {
                 console.log('success! created color user info file!');
             })
         });
-
-
-    generateHTML.readColorFile();
-    
-
 });
+
+
+
+console.log(generateHTML.color);
+
+
 
